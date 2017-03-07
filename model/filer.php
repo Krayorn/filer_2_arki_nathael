@@ -14,7 +14,7 @@ function insert_new_files($data, $post =""){
         $filename = basename($data['name']);
     }
     $type = dirname(mime_content_type($data['tmp_name']));
-    $filepath = 'users/' . $_SESSION['id'] .'/' . $filename;
+    $filepath = 'uploads/' . $_SESSION['id'] .'/' . $filename;
     if(!empty(check_file_name($filename))){
         return 'name already used';
     }
@@ -100,8 +100,8 @@ function rename_file($data){
             return 'name already used';
         }
         else{
-            $oldpath = 'users/' . $_SESSION['id'] . '/' . $changename;
-            $newpath = 'users/' . $_SESSION['id'] . '/' . $newname . $extension;
+            $oldpath = 'uploads/' . $_SESSION['id'] . '/' . $changename;
+            $newpath = 'uploads/' . $_SESSION['id'] . '/' . $newname . $extension;
             $d = "UPDATE `files` SET `filepath` = :newpath, `filename` = :newname  WHERE `filename` =:changename AND `user_id` =:userid";
             $statement = $dbh->prepare($d);
             $statement->execute([

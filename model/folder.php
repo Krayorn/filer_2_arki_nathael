@@ -4,7 +4,7 @@ require_once('model/db.php');
 require_once('model/filer.php');
 
 function new_folder($newfolder){
-    $folderpath = 'users/'. $_SESSION['id'] . '/' . $newfolder;
+    $folderpath = 'uploads/'. $_SESSION['id'] . '/' . $newfolder;
 
     if(!empty(check_folder_name($newfolder))){
         return 'name already used';
@@ -25,7 +25,7 @@ function new_folder($newfolder){
         'foldername' => $newfolder));
 
     $folderinfo = $req->fetch();
-    $folderid = 'users/'. $_SESSION['id'] . '/' . $folderinfo['id'];
+    $folderid = 'uploads/'. $_SESSION['id'] . '/' . $folderinfo['id'];
     mkdir($folderid);
 
     $req = $dbh->prepare('UPDATE `folders` SET `folderpath` = :newpath WHERE `foldername` =:foldername AND `user_id` =:userid');
@@ -70,7 +70,7 @@ function display_folders(){
         $q->execute(array(
             'userid' => $_SESSION['id']));
 
-        $select = '<select name="movefolder"><option value="users/'. $_SESSION['id'] .'">Dossier Principal</option>';
+        $select = '<select name="movefolder"><option value="uploads/'. $_SESSION['id'] .'">Dossier Principal</option>';
         while ($movefolders = $q->fetch()){
             $select = $select . '<option value="' . $movefolders['folderpath'] . '">' . $movefolders['foldername'] . '</option>';
         }
@@ -102,7 +102,7 @@ function display_folders(){
             $q->execute(array(
                 'userid' => $_SESSION['id']));
 
-            $select = '<select name="movefolder"><option value="users/'. $_SESSION['id'] .'">Dossier Principal</option>';
+            $select = '<select name="movefolder"><option value="uploads/'. $_SESSION['id'] .'">Dossier Principal</option>';
             while ($movefolders = $q->fetch()){
                 $select = $select . '<option value="' . $movefolders['folderpath'] . '">' . $movefolders['foldername'] . '</option>';
             }
@@ -136,7 +136,7 @@ function display_files($donnees){
         $req->execute(array(
             'userid' => $_SESSION['id']));
 
-        $select = '<select name="move_to"><option value="users/'. $_SESSION['id'] .'">Dossier Principal</option>';
+        $select = '<select name="move_to"><option value="uploads/'. $_SESSION['id'] .'">Dossier Principal</option>';
         while ($movefiles = $req->fetch()){
             $select = $select . '<option value="' . $movefiles['folderpath'] . '">' . $movefiles['foldername'] . '</option>';
         }
@@ -237,7 +237,7 @@ function move_file($data){
 
     $oldpath = $data['filetomove'];
     $newpath = $data['move_to'] . '/' . basename($data['filetomove']);
-    if($data['move_to'] == 'users/'.$_SESSION['id']){
+    if($data['move_to'] == 'uploads/'.$_SESSION['id']){
         $newfolderid = null;
     }
     else{
@@ -266,7 +266,7 @@ function move_folder($data){
     $oldpath = $data['foldertomove'];
     $newpath = $data['movefolder'] . '/' . basename($data['foldertomove']);
 
-    if($data['movefolder'] == 'users/'.$_SESSION['id']){
+    if($data['movefolder'] == 'uploads/'.$_SESSION['id']){
         $newfolderid = null;
     }
     else{

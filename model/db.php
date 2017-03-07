@@ -39,7 +39,7 @@ function db_insert_new_user($data){
                     'email' => $data['email'],
                 ]);
     $resultat = $sth->fetch();
-    mkdir('users/'.$resultat['id']);
+    mkdir('uploads/'.$resultat['id']);
 
     $log_info =' => L\'utilisateur ' . $data['username'] . ' s\'est inscrit.' . "\n";
     write_log('access.log', $log_info);
