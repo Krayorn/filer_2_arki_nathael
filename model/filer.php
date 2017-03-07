@@ -4,7 +4,7 @@ require_once('model/db.php');
 
 function insert_new_files($data, $post =""){
     $dbh = get_dbh();
-    $extensions = array('image', 'text', 'application', 'audio');
+    $extensions = array('image', 'text', 'application', 'audio', 'video');
     $extension = strrchr(basename($data['name']), '.');
     
     if(!empty($post['name'])){

@@ -73,10 +73,6 @@ main{
     color:black;
     text-decoration: none;
 }
-.allfiles a:hover{
-    text-decoration: underline;
-    font-style: italic;
-}
 .files{
     width: 200px;
     margin-right: 10px;
@@ -130,6 +126,6 @@ footer div span{
     display: flex;
 }
 .trash{
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
 }

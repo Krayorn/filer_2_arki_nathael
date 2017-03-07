@@ -144,25 +144,31 @@ function display_files($donnees){
         
 
     if($donnees['type'] =='image'){
-        $file_displayed = '<div class="files"><img src="' .$donnees['filepath']. '" alt="' .$donnees['filename']. '"/><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
-        download="' .$donnees['filename']. '">Télécharger l\'image</a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
-        value="'.$donnees['filename'].'"name="filetodelete" ><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" value="'.$donnees['filepath'].'"name="filetomove" id="filetomove">'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>';
+        $file_displayed = '<div class="files"><div><img src="' .$donnees['filepath']. '" alt="' .$donnees['filename']. '"/><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
+        download="' .$donnees['filename']. '"><img class="trash" src="assets/dl.svg" alt="trash"></a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
+        value="'.$donnees['filename'].'"name="filetodelete" ><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label></div><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" value="'.$donnees['filepath'].'"name="filetomove" id="filetomove">'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>';
     }
     elseif($donnees['type'] =='text'){
         $file_displayed =  '<div class="files"><iframe src="' .$donnees['filepath']. '"></iframe><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
-        download="' .$donnees['filename']. '">Télécharger le fichier</a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
+        download="' .$donnees['filename']. '"><img class="trash" src="assets/dl.svg" alt="trash"></a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filename'].'"name="filetodelete"><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filepath'].'"name="filetomove" >'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>';
     }
     elseif($donnees['type'] =='audio'){
         $file_displayed =  '<div class="files"><audio controls src="' .$donnees['filepath']. '"></audio><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
-        download="' .$donnees['filename']. '">Télécharger le fichier</a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
+        download="' .$donnees['filename']. '"><img class="trash" src="assets/dl.svg" alt="trash"></a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filename'].'"name="filetodelete" ><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filepath'].'"name="filetomove" >'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>';
     }
+    elseif($donnees['type'] == 'video'){
+        $file_displayed =  '<div class="files"><video controls src="' .$donnees['filepath']. '"></video><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
+        download="' .$donnees['filename']. '"><img class="trash" src="assets/dl.svg" alt="trash"></a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
+        value="'.$donnees['filename'].'"name="filetodelete" ><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
+        value="'.$donnees['filepath'].'"name="filetomove">'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>'; 
+    }
     else{
         $file_displayed =  '<div class="files"><embed src="' .$donnees['filepath']. '"></embed><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
-        download="' .$donnees['filename']. '">Télécharger le fichier</a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
+        download="' .$donnees['filename']. '"><img class="trash" src="assets/dl.svg" alt="trash"></a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filename'].'"name="filetodelete" ><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filepath'].'"name="filetomove">'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>';        
     }
