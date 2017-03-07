@@ -1,0 +1,104 @@
+body{
+    margin: 0px;
+}
+.firstline{
+    width: 100%;
+    height:10px;
+    background-color:red;
+    margin-bottom: 10px;
+}
+header{
+    padding: 0% 15%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.title{
+    font-size: 24px;
+    padding-top: 20px;
+}
+span{
+    color: red;
+    font-weight: bold;
+}
+.title span{
+    font-size: 30px;
+}
+.inscription{
+    display: flex;
+    align-items: baseline;
+}
+.inscription a{
+    margin-left:15px;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: #FF2000;
+    box-shadow: 6px 6px 8px black;
+}
+.inscription span{
+    font-size: 22px;
+}
+.connected{
+    font-size: 22px;
+    border : solid 2px red;
+    padding: 15px
+}
+.deco{
+    font-size: 18px;
+}
+main{
+    padding: 0% 15%;
+    height: 400px;
+    display: flex;
+}
+.description{
+    width: 60%;
+    border: solid 2px  #FF0038;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 6px 6px 8px black;
+    align-items: center;
+    font-size: 18px;
+}
+p span{
+    font-size: 24px;
+}
+.formOne{
+    text-align: center;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: #FF2000;
+    width: 40%;
+    box-shadow: 4px 6px 8px black;
+    border: solid 2px  #FF0038;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    margin: 0px 10px;
+}
+fieldset{
+    background-color: white;
+    height: 160px;
+    border-radius: 5px;
+}
+.footerline{
+    height: 2px; 
+    background-color: red;
+    margin: 80px 15% 0% 15%;
+}
+footer{
+    padding: 0% 15%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+footer div span{
+    font-size: 20px;
+}
