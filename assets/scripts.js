@@ -24,4 +24,13 @@ window.onload = function (){
         this.parentNode.parentNode.childNodes[2].style.display = "flex";
 		}
 	}
+
+    var modiftxt = document.querySelectorAll('.changetxt');
+
+    for(var i = 0; i < modiftxt.length; i++){
+		modiftxt[i].onclick = function(){
+            this.parentNode.childNodes[1].style.display = "block";
+		}
+	}
+
 }

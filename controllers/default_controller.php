@@ -22,7 +22,8 @@ function register_action(){
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(check_valid_data($_POST) === true){
             db_insert_new_user($_POST);
-            $error = 'Inscription effectuée';
+            header('Location: ?action=home');
+            exit(0);
         }
         else{
             $error = check_valid_data($_POST);
@@ -37,13 +38,14 @@ function files_action($error = null){
         require('views/files.php');
     }
     else{
-        write_log('security.log', 'Quelqu\'un a essayé d\'acceder a la page de files sans être connecté' ."\n");
+        write_log('security.log', 'Someone tried to connect' ."\n");
         header('Location: ?action=home');
         exit(0);
     }
 }
 
 function deco_action(){
+    write_log('access.log', ' => user ' . $_SESSION['username'] . ' loged out.' . "\n");
     session_destroy();
     header('Location: ?action=home');
     exit(0);

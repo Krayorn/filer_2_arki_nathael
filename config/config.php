@@ -14,6 +14,7 @@ $routes = [
     'renamefolder'  => 'folder',
     'movefile'      => 'folder',
     'movefolder'    => 'folder',
+    'changetxt'     => 'folder',
 ];
 
 $db_config = [

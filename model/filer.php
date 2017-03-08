@@ -32,7 +32,7 @@ function insert_new_files($data, $post =""){
             'type' => $type,
         ]);
 
-        $log_info = ' => L\'utilisateur ' . $_SESSION['username'] . ' a uploadé un fichier "' . $filename . '" de type "' . $type . '".' . "\n";
+        $log_info = ' => user ' . $_SESSION['username'] . ' upload a file "' . $filename . '" de type "' . $type . '".' . "\n";
         write_log('access.log', $log_info);
 
         return true;
@@ -67,7 +67,7 @@ function delete_file($filetodelete){
         'userid' => $_SESSION['id'],
     ]);
 
-    $log_info =' => L\'utilisateur ' . $_SESSION['username'] . ' a supprimé le fichier "' . $filetodelete . '".' . "\n";
+    $log_info =' => user ' . $_SESSION['username'] . ' delete the file "' . $filetodelete . '".' . "\n";
     write_log('access.log', $log_info);
 
     return 'file deleted';
@@ -112,7 +112,7 @@ function rename_file($data){
             ]);
             rename($oldpath, $newpath);
 
-            $log_info = ' => L\'utilisateur ' . $_SESSION['username'] . ' a renommé le fichier "' . $changename . '" en "' . $newname . $extension .'".' . "\n";
+            $log_info = ' => user ' . $_SESSION['username'] . ' renamed the file "' . $changename . '" to "' . $newname . $extension .'".' . "\n";
             write_log('access.log', $log_info);
 
             return "file renamed";

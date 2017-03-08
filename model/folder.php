@@ -34,7 +34,7 @@ function new_folder($newfolder){
         'foldername' => $newfolder,
         'newpath' => $folderid));
 
-    $log_info = ' => L\'utilisateur ' . $_SESSION['username'] . ' a crée un dossier "' . $newfolder . '".' . "\n";
+    $log_info = ' => user ' . $_SESSION['username'] . ' create the folder "' . $newfolder . '".' . "\n";
     write_log('access.log', $log_info);
 
     return 'folder created';
@@ -149,8 +149,7 @@ function display_files($donnees){
     elseif($donnees['type'] =='text'){
         $file_displayed =  '<div class="files"><img class="imgtxt" src="assets/imgtxt.png" alt="doctext"><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
         download="' .$donnees['filename']. '"><img class="trash" src="assets/dl.svg" alt="trash"></a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
-        value="'.$donnees['filename'].'"name="filetodelete"><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
-        value="'.$donnees['filepath'].'"name="filetomove" >'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>';
+        value="'.$donnees['filename'].'"name="filetodelete"><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" value="'.$donnees['filepath'].'"name="filetomove" >'. $select .'<input type="submit" value="Deplacer le fichier"/></form><div><input type="submit" class="changetxt" name="changetxt" value="Modifier le contenu"><form class="hidden modiftxt" action="?action=changetxt" method="post" enctype="multipart/form-data" ><input class="hidden" required type="text" value="'.$donnees['filepath'].'"name="filetochange" ><textarea name="txt_content" rows="20" cols="100">' . file_get_contents($donnees['filepath']) . '</textarea><input name="modifthetxt" type="submit" value="Modifier !"></form></div></div>';
     }
     elseif($donnees['type'] =='audio'){
         $file_displayed =  '<div class="files"><audio controls src="' .$donnees['filepath']. '"></audio><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
@@ -201,7 +200,7 @@ function delete_folder($foldertodelete){
         'userid' => $_SESSION['id'],
     ]);
 
-    $log_info =' => L\'utilisateur ' . $_SESSION['username'] . ' a supprimé le dossier "' . $path['foldername'] . '".' . "\n";
+    $log_info =' => user ' . $_SESSION['username'] . ' delete the folder "' . $path['foldername'] . '".' . "\n";
     write_log('access.log', $log_info);
 
     return 'folder deleted';
@@ -228,7 +227,7 @@ function rename_folder($data){
             'newfoldername' => $data['newfoldername'],
         ]);
 
-            $log_info = ' => L\'utilisateur ' . $_SESSION['username'] . ' a renommé le dossier "' . $data['foldertorename'] . '" en "' . $data['newfoldername'] .'".' . "\n";
+            $log_info = ' => user ' . $_SESSION['username'] . ' renamed the folder "' . $data['foldertorename'] . '" to "' . $data['newfoldername'] .'".' . "\n";
             write_log('access.log', $log_info);
     }
 
@@ -258,7 +257,7 @@ function move_file($data){
     ]);
     rename($oldpath, $newpath);
 
-    $log_info = ' => L\'utilisateur ' . $_SESSION['username'] . ' a déplacer le fichier"' . basename($data['filetomove']) . '" a l\'url "' . $newpath .'".' . "\n";
+    $log_info = ' => user ' . $_SESSION['username'] . ' move the file "' . basename($data['filetomove']) . '" to "' . $newpath .'".' . "\n";
     write_log('access.log', $log_info);
 
     return 'file moved';
@@ -302,8 +301,25 @@ function move_folder($data){
         ]);
     }
 
-    $log_info = ' => L\'utilisateur ' . $_SESSION['username'] . ' a déplacer le dossier"' . $oldpath . '" a l\'url "' . $newpath .'".' . "\n";
+    $log_info = ' => user ' . $_SESSION['username'] . ' move the folder "' . $oldpath . '" to "' . $newpath .'".' . "\n";
     write_log('access.log', $log_info);
 
     return 'file moved';
 }
+
+function modiftxt(){
+    $bool = false;
+    if(isset($_POST['modifthetxt'])){
+        if(isset($_POST['txt_content']) && isset($_POST['filetochange']) && $_POST['filetochange'] != ''){
+            $file = $_POST['filetochange'];
+            $txt_content = $_POST['txt_content'];
+            file_put_contents($file, $txt_content);
+            $bool = true;
+        }
+    }
+
+    $log_info = ' => user ' . $_SESSION['username'] . ' change the content of "' . $file . '"' . "\n";
+    write_log('access.log', $log_info);
+
+     return $bool;
+} 

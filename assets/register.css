@@ -29,14 +29,12 @@ a{
     padding: 10px;
     border-radius: 7px;
     background-color: #FF2000;
-    box-shadow: 6px 6px 8px black;
 }
 .center{
     margin: 0% 30%;
     padding: 2% 0%;
     background-color: red;
     border-radius: 20px;
-    box-shadow: 6px 6px 8px black;
 }
 .form{
     margin: 10% 20%;

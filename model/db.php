@@ -26,11 +26,14 @@ function get_dbh(){
 
 function db_insert_new_user($data){
     $dbh = get_dbh();
+
+    $hash = password_hash($data['password'], PASSWORD_BCRYPT, ['salt' => 'saltysaltysaltysalty!!']);
+
     $query = "INSERT INTO `users` (`username`, `password`, `email`) VALUES (:username, :password, :email);";
     $sth = $dbh->prepare($query);
     $sth->execute([
                     'username' => $data['username'],
-                    'password' => $data['password'],
+                    'password' => $hash,
                     'email' => $data['email'],
                 ]);
     $query = "SELECT id FROM `users` WHERE `email` = :email";
@@ -41,13 +44,15 @@ function db_insert_new_user($data){
     $resultat = $sth->fetch();
     mkdir('uploads/'.$resultat['id']);
 
-    $log_info =' => L\'utilisateur ' . $data['username'] . ' s\'est inscrit.' . "\n";
+    $log_info =' => user ' . $data['username'] . ' register.' . "\n";
     write_log('access.log', $log_info);
 
     return true;
 }
 
 function check_valid_data($data){
+    if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) 
+        return "Invalid email format";
     if (empty($data['username']) OR empty($data['email']) OR empty($data['password']) or empty($data['verifpassword']))
         return 'fields missings';
     if(check_free('username', $data['username']) !== true)
@@ -83,11 +88,14 @@ function check_valid_user($data){
 
 function does_user_exist($data){
     $dbh = get_dbh();
+
+    $hash = password_hash($data['password'], PASSWORD_BCRYPT, ['salt' => 'saltysaltysaltysalty!!']);
+
     $query = "SELECT id FROM `users` WHERE `username` = :username AND `password` = :password";
     $sth = $dbh->prepare($query);
     $sth->execute([
                     'username' => $data['username'],
-                    'password' => $data['password'],
+                    'password' => $hash,
                 ]);
     $resultat = $sth->fetch();
     if (!$resultat){
@@ -98,18 +106,24 @@ function does_user_exist($data){
 
 function connect_user($data){
     $dbh = get_dbh();
+
+    $hash = password_hash($data['password'], PASSWORD_BCRYPT, ['salt' => 'saltysaltysaltysalty!!']);
+    
     $query = "SELECT * FROM `users` WHERE `username` = :username AND `password` = :password";
     $sth = $dbh->prepare($query);
     $sth->execute([
                     'username' => $data['username'],
-                    'password' => $data['password'],
+                    'password' => $hash,
                 ]);
     $resultat = $sth->fetch();
     $_SESSION['id'] = $resultat['id'];
     $_SESSION['username'] = $resultat['username'];
 
-    $log_info = ' => L\'utilisateur ' . $_SESSION['username'] . ' s\'est connecté.' . "\n";
+    $log_info = ' => user ' . $_SESSION['username'] . ' loged in.' . "\n";
     write_log('access.log', $log_info);
+
+    header('Location: ?action=files');
+    exit(0);
 }
 
 function give_me_date(){

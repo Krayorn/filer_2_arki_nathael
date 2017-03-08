@@ -36,7 +36,6 @@ span{
     padding: 10px;
     border-radius: 7px;
     background-color: #FF2000;
-    box-shadow: 6px 6px 8px black;
 }
 .inscription span{
     font-size: 22px;
@@ -59,7 +58,6 @@ main{
     border: solid 2px  #FF0038;
     display: flex;
     flex-direction: column;
-    box-shadow: 6px 6px 8px black;
     align-items: center;
     font-size: 18px;
 }
@@ -73,7 +71,7 @@ p span{
     justify-content: center;
     background-color: #FF2000;
     width: 40%;
-    box-shadow: 4px 6px 8px black;
+
     border: solid 2px  #FF0038;
 }
 form{

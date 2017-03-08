@@ -58,3 +58,10 @@ function movefolder_action(){
     }
     files_action($folder_moved_error);    
 }
+
+function changetxt_action(){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        modiftxt();  
+    }
+    files_action();   
+}
