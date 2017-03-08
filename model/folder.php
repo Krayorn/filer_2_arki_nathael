@@ -158,7 +158,7 @@ function display_files($donnees){
         value="'.$donnees['filepath'].'"name="filetomove" >'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>';
     }
     elseif($donnees['type'] == 'video'){
-        $file_displayed =  '<div class="files"><video controls src="' .$donnees['filepath']. '"></video><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
+        $file_displayed =  '<div class="files"><video width="300px" controls src="' .$donnees['filepath']. '"></video><p>' .$donnees['filename']. '</p><a href="' .$donnees['filepath']. '"
         download="' .$donnees['filename']. '"><img class="trash" src="assets/dl.svg" alt="trash"></a><form action="?action=delete" method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filename'].'"name="filetodelete" ><label for="'.$donnees['filename'].'"><img class="trash" src="assets/remove_task.png" alt="trash"></label><input id="'.$donnees['filename'].'" class="hidden"type="submit" value="Supprimer"></form><form action=?action=movefile method="post" enctype="multipart/form-data"><input class="hidden" required type="text" 
         value="'.$donnees['filepath'].'"name="filetomove">'. $select .'<input type="submit" value="Deplacer le fichier"/></form></div>'; 
